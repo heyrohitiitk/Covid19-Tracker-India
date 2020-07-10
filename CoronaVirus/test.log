@@ -1,0 +1,25 @@
+[2020-07-10 14:24:40,192]: DEBUG :Stats send successfuly to rohitk111099@gmail.com
+[2020-07-10 15:41:05,632]: DEBUG :Stats send successfuly to rohitk111099@gmail.com
+[2020-07-10 15:42:24,022]: DEBUG :Stats send successfuly to rohitk111099@gmail.com
+[2020-07-10 15:45:49,850]: DEBUG :Stats send successfuly to rohitk111099@gmail.com
+[2020-07-10 15:50:10,969]: DEBUG :Stats send successfuly to rohitk111099@gmail.com
+[2020-07-10 15:51:15,793]: DEBUG :Stats send successfuly to rohitk111099@gmail.com
+[2020-07-10 17:42:36,870]: ERROR :Exception Occured in main.py->sendMail(): TypeError : Object of type datetime is not JSON serializable
+[2020-07-10 17:44:32,861]: ERROR :Exception Occured in main.py->sendMail(): JSONDecodeError : Expecting value: line 2 column 18 (char 19)
+[2020-07-10 17:47:15,114]: ERROR :Exception Occured in main.py->sendMail(): JSONDecodeError : Expecting value: line 2 column 18 (char 19)
+[2020-07-10 17:52:57,535]: ERROR :Exception Occured in main.py->sendMail(): JSONDecodeError : Expecting value: line 2 column 18 (char 19)
+[2020-07-10 17:58:21,352]: DEBUG :Stats send successfuly to rohitk111099@gmail.com
+[2020-07-10 18:00:02,432]: DEBUG :Stats send successfuly to rohitk111099@gmail.com
+[2020-07-10 18:01:04,552]: DEBUG :Stats send successfuly to rohitk111099@gmail.com
+[2020-07-10 18:01:40,391]: DEBUG :Stats send successfuly to rohitk111099@gmail.com
+[2020-07-10 18:04:00,499]: DEBUG :Stats send successfuly to rohitk111099@gmail.com
+[2020-07-10 18:04:39,898]: DEBUG :Stats send successfuly to rohitk111099@gmail.com
+[2020-07-10 20:17:10,458]: DEBUG :Stats send successfuly to rohitk111099@gmail.com
+[2020-07-10 20:19:26,456]: DEBUG :Stats send successfuly to rohitk111099@gmail.com
+[2020-07-10 20:25:40,963]: DEBUG :Stats send successfuly to rohitk111099@gmail.com
+[2020-07-10 20:26:13,047]: DEBUG :Stats send successfuly to rohitk111099@gmail.com
+[2020-07-10 20:50:51,529]: DEBUG :Stats send successfuly to rohitk111099@gmail.com
+[2020-07-10 21:09:05,912]: DEBUG :Stats send successfuly to rohitk111099@gmail.com
+[2020-07-10 21:10:59,194]: DEBUG :Stats send successfuly to singhamankushwah@gmail.com
+[2020-07-10 21:49:24,256]: DEBUG :Stats send successfuly to rohitk111099@gmail.com
+[2020-07-10 21:56:19,299]: DEBUG :Stats send successfuly to rohitk111099@gmail.com
