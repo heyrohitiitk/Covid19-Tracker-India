@@ -58,7 +58,14 @@ def load():
 
 
 def save(x):
+    with open("past_data2.json", "r") as f:
+        res = json.load(f)
     with open("past_data.json", "w") as f:
+        json.dump(res, f, indent=2)
+
+
+def save2(x):
+    with open("past_data2.json", "w") as f:
         json.dump(x, f, indent=2)
 
 
@@ -94,6 +101,16 @@ def sendMail(obj, state=""):
         change = 0
         save(saver_data)
     else:
+        json_time = get_json_data.get("update_time")
+        json_time2 = datetime.strptime(json_time, "%Y-%m-%d").date()
+        time_gap = (cur_time - json_time2).days
+        if abs(time_gap) == 1:
+            save2(saver_data)
+        else:
+            save(saver_data)
+            save2(saver_data)
+            get_json_data = load()
+
         from_json = get_json_data.get("quick_list")
         from_site = obj.quick_list
         overall = [
@@ -107,13 +124,16 @@ def sendMail(obj, state=""):
         if any(overall):
             change = 1
 
-        json_time = get_json_data.get("update_time")
-        if str(cur_time) != json_time:
-            save(saver_data)
-
     if change == 0:
         overall = [0, 0, 0, 0]
         state_changes = [0, 0, 0, 0]
+    else:
+        if overall[0] >= 0:
+            overall[0] = "+" + str(overall[0])
+        if state_changes[0] >= 0:
+            state_changes[0] = "+" + str(state_changes[0])
+        if overall[3] >= 0:
+            overall[3] = "+" + str(overall[3])
 
     li = data[data["States"] == state.lower()]
     mp = {
@@ -132,17 +152,17 @@ def sendMail(obj, state=""):
         text = f"""\
             CORONAVIRUS CURRENT STATUS (INDIA)
             Data as on : {time}
-            Total Confirmed :{total}
-            ACTIVE CASES :{data_list['Active Cases']}
-            Cured/Discharded : {data_list['Cured / Discharged']}
-            DEATHS : {data_list['Deaths']}
-            MIGRATED : {data_list['Migrated']}
+            Total Confirmed :{total} 
+            ACTIVE CASES :{data_list['Active Cases']} ({overall[0]})
+            Cured/Discharded : {data_list['Cured / Discharged']} (+{overall[1]})
+            DEATHS : {data_list['Deaths']} (+{overall[2]})
+            MIGRATED : {data_list['Migrated']} ({overall[3]})
             
             {mp['state'].upper()} STATUS
-            Total Confirmed : {mp['confirmed']}
-            ACTIVE CASES :{mp['active']}
-            Cured/Discharded : {mp['recovered']}
-            DEATHS : {mp['death']}
+            Total Confirmed : {mp['confirmed']} (+{state_changes[3]})
+            ACTIVE CASES :{mp['active']} ({state_changes[0]})
+            Cured/Discharded : {mp['recovered']} (+{state_changes[1]})
+            DEATHS : {mp['death']} (+{state_changes[2]})
             
             ------------------------------------------------------------
             {tests}
@@ -157,13 +177,13 @@ def sendMail(obj, state=""):
                 <h1>CORONAVIRUS CURRENT STATUS (INDIA)</h1>
                 <h3>Data as on : {time}</h3>
                 <p><b>Total Confirmed :</b>{total}</p>
-                <p><b>ACTIVE CASES</b> :{data_list['Active Cases']} (+{overall[0]})</p>   
+                <p><b>ACTIVE CASES</b> :{data_list['Active Cases']} ({overall[0]})</p>   
                 <p><b>Cured/Discharded</b> : {data_list['Cured / Discharged']} (+{overall[1]})</p>
                 <p><b>DEATHS </b>: {data_list['Deaths']} (+{overall[2]})</p>
-                <p><b>MIGRATED</b> : {data_list['Migrated']} (+{overall[3]})</p>
+                <p><b>MIGRATED</b> : {data_list['Migrated']} ({overall[3]})</p>
                 <br>
                 <h2>{mp['state'].upper()} STATUS</h2>
-                <p><b>ACTIVE CASES</b> :{mp['active']} (+{state_changes[0]})</p>   
+                <p><b>ACTIVE CASES</b> :{mp['active']} ({state_changes[0]})</p>   
                 <p><b>Cured/Discharded</b> : {mp['recovered']} (+{state_changes[1]})</p>
                 <p><b>DEATHS </b>: {mp['death']} (+{state_changes[2]})</p>
                 <p><b>Total Confirmed :</b>{mp['confirmed']} (+{state_changes[3]})</p>                
