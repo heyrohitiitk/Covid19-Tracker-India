@@ -48,6 +48,10 @@ def sendError(obj, msg):
 
 
 def load():
+    if not os.path.exists("past_data.json"):
+        with open("past_data.json", "w") as f:
+            pass
+        return None
     check = os.path.getsize("past_data.json")
     if check == 0:
         return None
@@ -58,6 +62,11 @@ def load():
 
 
 def save(x):
+    if not os.path.exists("past_data2.json"):
+        with open("past_data.json", "w") as f:
+            json.dump(x, f)
+        return 0
+
     with open("past_data2.json", "r") as f:
         res = json.load(f)
     with open("past_data.json", "w") as f:
@@ -104,7 +113,7 @@ def sendMail(obj, state=""):
         json_time = get_json_data.get("update_time")
         json_time2 = datetime.strptime(json_time, "%Y-%m-%d").date()
         time_gap = (cur_time - json_time2).days
-        if abs(time_gap) == 1:
+        if abs(time_gap) == 1 or abs(time_gap) == 0:
             save2(saver_data)
         else:
             save(saver_data)
